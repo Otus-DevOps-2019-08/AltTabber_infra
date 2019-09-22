@@ -1,5 +1,7 @@
 # AltTabber_infra
 AltTabber Infra repository
+bastion_IP = 35.207.98.66
+someinternalhost_IP = 10.156.0.4
 
 ## Домашнее задание №1
 Был создан файл в форке репозитория и отправлен с помощью пулл реквеста к репозиторию источнику
