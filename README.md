@@ -1,7 +1,5 @@
 # AltTabber_infra
 AltTabber Infra repository
-bastion_IP = 35.207.98.66
-someinternalhost_IP = 10.156.0.4
 
 ## Домашнее задание №1
 Был создан файл в форке репозитория и отправлен с помощью пулл реквеста к репозиторию источнику
@@ -37,3 +35,38 @@ Host someinternalhost
 	IdentityFile ~/.ssh/appuser.key
 	ProxyCommand ssh -q -W %h:%p bastion
 ```
+
+## Домашнее задание №4
+
+Для создания инстанса используется операция вида (скрипт по организации сервера из файла):
+```
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --metadata-from-file startup-script=./startup-script.sh
+```
+Так же можно ввести скрип по организации сервера с ссылки
+```
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --metadata startup-script-url=https://gist.githubusercontent.com/AltTabber/3d5c68f288e8a56a3a73feb2b4599928/raw/41c45eba332294783e4733ab739a784eb53d43db/startup_script.sh
+```
+
+Для организации настроек фаервола используется:
+```
+gcloud compute firewall-rules create default-puma-server\
+  --allow=tcp:9292 \
+  --target-tags=puma-server
+```
+
+testapp_IP = 34.89.190.153
+testapp_port = 9292
